@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_fitness_coach/utils/app_dimens.dart';
+import 'package:my_fitness_coach/utils/app_fonts.dart';
 import 'package:my_fitness_coach/utils/behavior.dart';
 
 import '../../components/button_component.dart';
@@ -44,13 +46,30 @@ class LoginPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width: 20.0,
+                              width: 10.0,
                             ),
                             Expanded(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Image.asset("assets/icons/ic_barbell.png"),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        "assets/icons/ic_barbell.png",
+                                        height: 34.0,
+                                      ),
+                                      Text(
+                                        " MY FITNESS COACH",
+                                        style: TextStyle(
+                                            fontSize: AppDimens.text_size_28,
+                                            fontFamily: AppFonts.RobotoSlab,
+                                            color: AppColors.secondColor,
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
                                   Text(
                                     "Đăng Nhập",
                                     style: TextStyle(
@@ -89,7 +108,7 @@ class LoginPage extends StatelessWidget {
                                 hintColor: AppColors.secondColor,
                                 textColor: AppColors.blackColor,
                                 labelText: "Email",
-                                // controller: loginController.emailController,
+                                controller: loginController.emailController,
                               ),
                               SizedBox(
                                 height: 20.0,
@@ -105,8 +124,8 @@ class LoginPage extends StatelessWidget {
                                   labelText: "Mật khẩu",
                                   suffixIcon: IconButton(
                                     onPressed: () {
-                                      // loginController.isPassword.value =
-                                      //     !loginController.isPassword.value;
+                                      loginController.isPassword.value =
+                                          !loginController.isPassword.value;
                                     },
                                     icon: Icon(
                                       loginController.isPassword.value
@@ -123,8 +142,8 @@ class LoginPage extends StatelessWidget {
                               Center(
                                 child: ButtonComponent(
                                   ontap: () {
-                                    // loginController
-                                    //     .loginWithEmailAndPassword(context);
+                                    loginController
+                                        .loginWithEmailAndPassword(context);
                                   },
                                   color: AppColors.secondColor,
                                   text: "Đăng nhập",

@@ -1,13 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_fitness_coach/configs/controller_binding.dart';
 
 import '../firebase_options.dart';
 import '../routing/app_routes.dart';
+import '../utils/singleton.dart';
 import 'my_app_controller.dart';
 
 void mainCommon() async {
-  //Singleton().initial();
+  Singleton().initial();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -18,12 +20,13 @@ void mainCommon() async {
 class MyLoveApp extends StatelessWidget {
   MyLoveApp({Key? key}) : super(key: key);
   MyAppController myAppController = Get.put(MyAppController());
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MyAppController>(
         id: "routeName",
         builder: (_) => GetMaterialApp(
+              navigatorKey: myAppController.globalNavigatorKey,
+              initialBinding: ControllerBinding(),
               title: 'My Love App',
               // locale: LocalizationService.locale,
               // fallbackLocale: LocalizationService.fallbackLocale,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'app_string.dart';
 import 'colors.dart';
@@ -84,7 +85,7 @@ class DialogsUtils {
                           style: ElevatedButton.styleFrom(
                               elevation: 0,
                               padding: EdgeInsets.zero,
-                              // primary: AppColors.greyColor, // background
+                              primary: AppColors.greyColor, // background
                               onPrimary: Color(0xFFD2D3D4), // foreground
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
@@ -126,5 +127,76 @@ class DialogsUtils {
                     child: const Text('OK'),
                   ),
                 ]));
+  }
+
+  static void showAlterLoading(BuildContext context) {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (_) {
+          return Center(
+              child: LoadingAnimationWidget.threeRotatingDots(
+            color: AppColors.brandColor,
+            size: 40,
+          ));
+        });
+  }
+
+  static void showAlterSnackbar(BuildContext context, String content) {
+    final snackBar = SnackBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      content: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.brandColor,
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x19000000),
+              spreadRadius: 2.0,
+              blurRadius: 8.0,
+              offset: Offset(2, 4),
+            )
+          ],
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 10.0,
+            ),
+            Image.asset(
+              "assets/icons/ic_warning.png",
+              height: 32.0,
+            ),
+            SizedBox(
+              width: 6.0,
+            ),
+            Expanded(
+              child: Text(
+                content,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
+              ),
+            ),
+            SizedBox(
+              width: 6.0,
+            ),
+            TextButton(
+                onPressed: () =>
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+                child: Text(
+                  "OK",
+                  style: TextStyle(
+                      color: AppColors.secondColor,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold),
+                ))
+          ],
+        ),
+      ),
+      duration: Duration(seconds: 2),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

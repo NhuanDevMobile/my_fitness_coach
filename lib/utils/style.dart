@@ -9,3 +9,8 @@ final TextStyle styleTitleAppBar = TextStyle(
     fontFamily: AppFonts.RobotoSlab);
 final TextStyle erroStyle =
     TextStyle(fontSize: 12.0, fontFamily: AppFonts.RobotoSlab);
+final TextStyle styleTitle = TextStyle(
+    fontSize: 16.0,
+    color: AppColors.blackColor,
+    fontWeight: FontWeight.w500,
+    fontFamily: AppFonts.RobotoSlab);
